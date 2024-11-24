@@ -27,6 +27,10 @@ class Player
         // More methods to be added here
 
     private:
+        int dx = 0;
+        int dy = 0; // change in x and y as per FSM
+        
+
         objPos playerPos; // Upgrade this in iteration 3.       
         enum Dir myDir;
 

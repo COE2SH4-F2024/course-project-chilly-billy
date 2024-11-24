@@ -19,6 +19,7 @@ class GameMechs
 
         int boardSizeX;
         int boardSizeY;
+        char** board;
 
         objPos food;
 
@@ -27,6 +28,14 @@ class GameMechs
         GameMechs(int boardX, int boardY);
         ~GameMechs(); // is this one needed at all? Why or why not?
         
+
+        // my functions
+        void clearBoard();
+        void setBoard(int x, int y, char f);
+        char getBoard(int x, int y);
+        char* getBoardLine(int y);
+        // their functions
+
         bool getExitFlagStatus() const; 
         void setExitTrue();
         bool getLoseFlagStatus() const;

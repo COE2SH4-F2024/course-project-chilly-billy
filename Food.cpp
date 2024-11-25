@@ -16,11 +16,16 @@ Food::~Food()
 
 Food::Food(const Food &a)
 {
-    // deep copy
+    mainmech = a.mainmech;
+    foodPos = a.foodPos;
 }
 Food& Food::operator=(const Food &a)
 {
-
+    if(this != &a)
+    {
+        mainmech = a.mainmech;
+        foodPos = a.foodPos;
+    }
 }
 
 void Food::generateFood(objPos blockOff)

@@ -7,8 +7,6 @@ using namespace std;
 
 #define DELAY_CONST 100000
 
-bool exitFlag;
-
 void Initialize(void);
 void GetInput(void);
 void RunLogic(void);
@@ -24,7 +22,7 @@ int main(void)
 
     Initialize();
 
-    while(exitFlag == false)  
+    while(gamemechs->getExitFlagStatus() == false && gamemechs->getLoseFlagStatus() == false)  
     {
         GetInput();
         RunLogic();
@@ -43,8 +41,6 @@ void Initialize(void)
     MacUILib_clearScreen();
     gamemechs = new GameMechs();
     player1 = new Player(gamemechs);
-
-    exitFlag = false;
     
 }
 
@@ -80,4 +76,5 @@ void CleanUp(void)
 {
     MacUILib_clearScreen();
     MacUILib_uninit();
+
 }

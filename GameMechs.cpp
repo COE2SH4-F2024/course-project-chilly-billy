@@ -33,17 +33,18 @@ GameMechs::GameMechs(int boardX, int boardY)
     for(int i = 0; i < boardSizeY; i++)
     {
         board[i] = new char[boardSizeX+1];
-        for(int j = 0; j < boardSizeX-1; j++) // leave null char termination string
+        for(int j = 0; j < boardSizeX; j++) // leave null char termination string
         {
-            if(j == 0 || j == boardSizeX-2 || i == 0 || i == boardSizeY-1)
+            if(j == 0 || j == boardSizeX-1 || i == 0 || i == boardSizeY-1)
             {
-                board[i][j] = 35;
+                board[i][j] = '#';
             }
             else
             {
-                board[i][j] = 32;
+                board[i][j] = ' ';
             }
         }
+        board[i][boardSizeX] = 0;
     }
 }
 
@@ -56,6 +57,15 @@ GameMechs::~GameMechs()
     }
     delete[] board;
     board = nullptr;
+}
+
+GameMechs & GameMechs::operator=(const GameMechs &a)
+{
+    // deep copy
+}
+GameMechs::GameMechs(const GameMechs &a)
+{
+
 }
 
 void GameMechs::clearBoard()
@@ -86,28 +96,28 @@ char* GameMechs::getBoardLine(int y)
 
 bool GameMechs::getExitFlagStatus() const
 {
-
+    return exitFlag;
 }
 
 bool GameMechs::getLoseFlagStatus() const
 {
-
+    return loseFlag;
 }
     
 
 char GameMechs::getInput() const
 {
-
+    return input;
 }
 
 int GameMechs::getScore() const
 {
-
+    return score;
 }
 
 void GameMechs::incrementScore()
 {
-    
+    score+=1;
 }
 
 int GameMechs::getBoardSizeX() const
@@ -123,22 +133,22 @@ int GameMechs::getBoardSizeY() const
 
 void GameMechs::setExitTrue()
 {
-
+    exitFlag = 1;
 }
 
 void GameMechs::setLoseFlag()
 {
-    
+    loseFlag = 1;
 }
 
 void GameMechs::setInput(char this_input)
 {
-
+    input = this_input;
 }
 
 void GameMechs::clearInput()
 {
-
+    input = 0;
 }
 
 // More methods should be added here

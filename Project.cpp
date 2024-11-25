@@ -58,8 +58,8 @@ void GetInput(void)
 
 void RunLogic(void)
 {
-    //player1->updatePlayerDir();
-    //player1->movePlayer();
+    player1->updatePlayerDir();
+    player1->movePlayer();
 }
 
 void DrawScreen(void)
@@ -75,7 +75,6 @@ void LoopDelay(void)
 {
     MacUILib_Delay(DELAY_CONST); // 0.1s delays
 }
-
 
 void CleanUp(void)
 {

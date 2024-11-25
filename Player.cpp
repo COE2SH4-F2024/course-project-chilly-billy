@@ -106,13 +106,35 @@ void Player::updatePlayerDir()
                 break;
         }
     }
-    mainGameMechsRef->setInput(0);  
+    mainGameMechsRef->clearInput();  
 }
 
 void Player::movePlayer()
 {
     // PPA3 Finite State Machine logic
+    // clear previous spot
+    mainGameMechsRef->setBoard(playerPos.pos->x,playerPos.pos->y,' ');
+    
     playerPos.setObjPos(playerPos.getObjPos().pos->x+dx,playerPos.getObjPos().pos->y+dy,playerPos.getSymbol());
+    if(playerPos.pos->x == 0)
+    {
+        playerPos.setObjPos(mainGameMechsRef->getBoardSizeX()-2,playerPos.pos->y,playerPos.getSymbol());
+    }
+    else if(playerPos.pos->x == mainGameMechsRef->getBoardSizeX()-1)
+    {
+        playerPos.setObjPos(1,playerPos.pos->y,playerPos.getSymbol());
+
+    }
+    else if (playerPos.pos->y == 0)
+    {
+        playerPos.setObjPos(playerPos.pos->x,mainGameMechsRef->getBoardSizeY()-2,playerPos.getSymbol());
+    }
+    else if(playerPos.pos->y == mainGameMechsRef->getBoardSizeY()-1)
+    {
+        playerPos.setObjPos(playerPos.pos->x,1,playerPos.getSymbol());
+    }
+
+    mainGameMechsRef->setBoard(playerPos.pos->x,playerPos.pos->y,playerPos.symbol);
 }
 
 // More methods to be added

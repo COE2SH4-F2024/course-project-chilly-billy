@@ -94,7 +94,7 @@ void Food::generateFood(objPos blockOff)
     foodPos->setObjPos(randx,randy,randchar);
 }
 
-void Food::getFoodPos(objPos const)
+objPos Food::getFoodPos() const
 {
-
+    return *foodPos;
 }

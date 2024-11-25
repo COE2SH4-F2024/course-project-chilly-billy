@@ -4,14 +4,15 @@
 
 class Food
 {
-    Food(GameMechs* gamemechs);
-    ~Food();
-    Food(const Food &a);
-    Food& operator=(const Food &a);
+    
 
     public:
+        Food(GameMechs* gamemechs);
+        ~Food();
+        Food(const Food &a);
+        Food& operator=(const Food &a);
         void generateFood(objPos blockOff);
-        void getFoodPos(objPos const); 
+        objPos getFoodPos() const; 
     private:
         objPos* foodPos;
         GameMechs* mainmech;

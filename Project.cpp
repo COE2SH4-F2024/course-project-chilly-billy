@@ -2,6 +2,7 @@
 #include "MacUILib.h"
 #include "objPos.h"
 #include "Player.h"
+#include "Food.h"
 
 using namespace std;
 
@@ -16,6 +17,7 @@ void CleanUp(void);
 
 Player* player1;
 GameMechs* gamemechs;
+Food* apple;
 
 int main(void)
 {
@@ -41,7 +43,7 @@ void Initialize(void)
     MacUILib_clearScreen();
     gamemechs = new GameMechs();
     player1 = new Player(gamemechs);
-    
+    apple = new Food(gamemechs);
 }
 
 void GetInput(void)
@@ -56,6 +58,7 @@ void RunLogic(void)
 {
     player1->updatePlayerDir();
     player1->movePlayer();
+    apple->generateFood(player1->getPlayerPos());
 }
 
 void DrawScreen(void)

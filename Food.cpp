@@ -5,12 +5,10 @@
 Food::Food(GameMechs* gamemechs)
 {
     mainmech = gamemechs;
-    foodPos = new objPos();
 }
 
 Food::~Food()
 {
-    delete foodPos;
     delete mainmech;
 }
 
@@ -40,39 +38,33 @@ void Food::generateFood(objPos blockOff)
     xTaken[0] = blockOff.pos->x;
     yTaken[0] = blockOff.pos->y;
  
-    /*int j;
-    for(j=0;j<listSize;j++)
-    {
-        xTaken[j] = list[j].x;
-        yTaken[j] = list[j].y;
-    }
-    j++;*/
+
     int width = mainmech->getBoardSizeX();
     int height = mainmech->getBoardSizeY();
 
     int i;
     //randomly generate coords
-    int randx = rand() % width;
-    int randy = rand() % height;
+    int randx = (rand() % (width-2)) + 1;
+    int randy = (rand() % (height-2))+ 1;
         
     int available = 0;
     while(available == 0)
     {
         available = 1;
-        randx = (rand() % width-2) + 1; // can never be 0 or width-1
-        randy = (rand() % height-2)+1; // can never be 0 or height-1
+        randx = (rand() % (width-2)) + 1; // can never be 0 or width-1
+        randy = (rand() % (height-2))+1; // can never be 0 or height-1
         int xi;
         for(xi=0;xi<maxExcluded;xi++)
         {
             if(xTaken[xi] == randx)
             {
-                    available = 0;
+                available = 0;
             }
         }
         int yi;
         for(yi=0;yi<maxExcluded;yi++)
         {
-            if(xTaken[yi] == randy)
+            if(yTaken[yi] == randy)
             {
                 available = 0;
             }
@@ -96,10 +88,10 @@ void Food::generateFood(objPos blockOff)
         }
     }
     // set objpos to randomly generated x,y,char
-    foodPos->setObjPos(randx,randy,randchar);
+    foodPos.setObjPos(randx,randy,randchar);
 }
 
 objPos Food::getFoodPos() const
-{
-    return *foodPos;
+{ 
+    return foodPos.getObjPos();
 }

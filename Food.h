@@ -14,7 +14,7 @@ class Food
         void generateFood(objPos blockOff);
         objPos getFoodPos() const; 
     private:
-        objPos* foodPos;
+        objPos foodPos;
         GameMechs* mainmech;
 
 };

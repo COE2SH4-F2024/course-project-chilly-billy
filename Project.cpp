@@ -44,6 +44,8 @@ void Initialize(void)
     gamemechs = new GameMechs();
     player1 = new Player(gamemechs);
     apple = new Food(gamemechs);
+    apple->generateFood(player1->getPlayerPos());
+    gamemechs->setBoard(apple->getFoodPos().pos->x,apple->getFoodPos().pos->y,apple->getFoodPos().getSymbol());
 }
 
 void GetInput(void)
@@ -58,7 +60,7 @@ void RunLogic(void)
 {
     player1->updatePlayerDir();
     player1->movePlayer();
-    apple->generateFood(player1->getPlayerPos());
+
 }
 
 void DrawScreen(void)
@@ -68,6 +70,7 @@ void DrawScreen(void)
     {
         printf("%s\n", gamemechs->getBoardLine(i));
     }
+    printf("food char pos %d %d %c\n", apple->getFoodPos().pos->x,apple->getFoodPos().pos->y,apple->getFoodPos().getSymbol());
 }
 
 void LoopDelay(void)

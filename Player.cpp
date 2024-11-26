@@ -8,7 +8,7 @@ Player::Player(GameMechs* thisGMRef)
     int width = mainGameMechsRef->getBoardSizeX();
     int height = mainGameMechsRef->getBoardSizeY();
     playerPosList = new objPosArrayList();
-    playerPosList->insertHead(objPos(width/2-1,height/2-1,'*'));
+
 
     playerPosList->insertHead(objPos(width/2,height/2,'*'));
     
@@ -149,3 +149,13 @@ void Player::movePlayer()
 }
 
 // More methods to be added
+
+void Player::increasePlayerLength()
+{
+    // increase length
+}
+
+bool Player::checkFoodConsumption()
+{
+    // increment score
+}

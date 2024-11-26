@@ -7,8 +7,10 @@ Player::Player(GameMechs* thisGMRef)
     myDir = STOP;
     int width = mainGameMechsRef->getBoardSizeX();
     int height = mainGameMechsRef->getBoardSizeY();
-    playerPos.setObjPos(width/2,height/2,'*');
-    
+    playerPosList = new objPosArrayList();
+    playerPosList->insertHead(objPos(width/2-1,height/2-1,'*'));
+
+    playerPosList->insertHead(objPos(width/2,height/2,'*'));
     
 
     // more actions to be included
@@ -19,12 +21,13 @@ Player::~Player()
 {
     // delete any heap members here
     delete[] mainGameMechsRef;
+    delete[] playerPosList;
 }
 
-objPos Player::getPlayerPos() const
+objPosArrayList Player::getPlayerPos() const
 {
     // return the reference to the playerPos arrray list
-    return playerPos.getObjPos();
+    return *playerPosList;
 }
 
 void Player::updatePlayerDir()
@@ -113,9 +116,16 @@ void Player::movePlayer()
 {
     // PPA3 Finite State Machine logic
     // clear previous spot
-    mainGameMechsRef->setBoard(playerPos.pos->x,playerPos.pos->y,' ');
+    objPos oldpos = playerPosList->getHeadElement();
+    objPos tailpos = playerPosList->getTailElement();
+
+    mainGameMechsRef->setBoard(tailpos.getObjPos().pos->x,tailpos.getObjPos().pos->y,' ');
+
+
+    objPos playerPos = objPos(oldpos.getObjPos().pos->x,oldpos.getObjPos().pos->y,oldpos.getObjPos().getSymbol());
     
     playerPos.setObjPos(playerPos.getObjPos().pos->x+dx,playerPos.getObjPos().pos->y+dy,playerPos.getSymbol());
+    
     if(playerPos.pos->x == 0)
     {
         playerPos.setObjPos(mainGameMechsRef->getBoardSizeX()-2,playerPos.pos->y,playerPos.getSymbol());
@@ -133,8 +143,9 @@ void Player::movePlayer()
     {
         playerPos.setObjPos(playerPos.pos->x,1,playerPos.getSymbol());
     }
-
-    mainGameMechsRef->setBoard(playerPos.pos->x,playerPos.pos->y,playerPos.symbol);
+    playerPosList->removeTail();
+    playerPosList->insertHead(objPos(playerPos.getObjPos().pos->x,playerPos.getObjPos().pos->y,playerPos.getSymbol()));
+    mainGameMechsRef->setBoard(playerPos.pos->x,playerPos.pos->y,playerPos.getSymbol());
 }
 
 // More methods to be added

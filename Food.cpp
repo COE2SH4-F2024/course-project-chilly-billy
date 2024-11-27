@@ -50,6 +50,7 @@ void Food::generateFood(objPosArrayList *blockOff)
     //randomly generate coords
     int randx = (rand() % (width-2)) + 1;
     int randy = (rand() % (height-2))+ 1;
+    int randchar = randchar = (rand() % 93)+33; // 126-33 is the range, add 33 to it for ascii alphanumeric
         
     int available = 0;
     while(available == 0)
@@ -57,40 +58,17 @@ void Food::generateFood(objPosArrayList *blockOff)
         available = 1;
         randx = (rand() % (width-2)) + 1; // can never be 0 or width-1
         randy = (rand() % (height-2))+1; // can never be 0 or height-1
+        randchar = (rand() % 93)+33; // 126-33 is the range, add 33 to it for ascii alphanumeric
         int xi;
         for(xi=0;xi<maxExcluded;xi++)
         {
-            if(xTaken[xi] == randx)
-            {
-                available = 0;
-            }
-        }
-        int yi;
-        for(yi=0;yi<maxExcluded;yi++)
-        {
-            if(yTaken[yi] == randy)
+            if(xTaken[xi] == randx || yTaken[xi] == randy || symbolTaken[xi] == randchar)
             {
                 available = 0;
             }
         }
     }
         //randomly select chars from the goalstring
-
-    int freeChar = 0;
-    int randchar = 0;
-    while(freeChar == 0)
-    {
-        freeChar = 1;
-        randchar = (rand() % 93)+33; // 126-33 is the range, add 33 to it for ascii alphanumeric
-        int g;
-        for(g=0;g<1;g++)
-        {
-            if(symbolTaken[g] == randchar)
-            {
-                freeChar = 0;
-            }
-        }
-    }
     // set objpos to randomly generated x,y,char
     foodPos.setObjPos(randx,randy,randchar);
 }

@@ -1,3 +1,6 @@
+#ifndef FOOD_H
+#define FOOD_H
+
 #include <iostream>
 #include "objPos.h"
 #include "GameMechs.h"
@@ -18,3 +21,5 @@ class Food
         GameMechs* mainmech;
 
 };
+
+#endif

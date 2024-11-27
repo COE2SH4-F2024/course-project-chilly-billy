@@ -42,8 +42,8 @@ void Initialize(void)
     MacUILib_init();
     MacUILib_clearScreen();
     gamemechs = new GameMechs();
-    player1 = new Player(gamemechs);
     apple = new Food(gamemechs);
+    player1 = new Player(gamemechs,apple);
     apple->generateFood(player1->getPlayerPos());
     gamemechs->setBoard(apple->getFoodPos().pos->x,apple->getFoodPos().pos->y,apple->getFoodPos().getSymbol());
 }
@@ -70,7 +70,7 @@ void DrawScreen(void)
     {
         printf("%s\n", gamemechs->getBoardLine(i));
     }
-    //printf("food char pos %d %d %c\n", apple->getFoodPos().pos->x,apple->getFoodPos().pos->y,apple->getFoodPos().getSymbol());
+    printf("%d",gamemechs->getScore());
 }
 
 void LoopDelay(void)

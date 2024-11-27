@@ -4,6 +4,7 @@ GameMechs::GameMechs()
 {
     boardSizeX = 30;
     boardSizeY = 15;
+    score = 0;
     board = new char*[boardSizeY];
 
     for(int i = 0; i < boardSizeY; i++)

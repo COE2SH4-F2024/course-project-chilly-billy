@@ -70,7 +70,7 @@ void DrawScreen(void)
     {
         printf("%s\n", gamemechs->getBoardLine(i));
     }
-    printf("%d",gamemechs->getScore());
+    MacUILib_printf("Score: %d\n",gamemechs->getScore());
 }
 
 void LoopDelay(void)
@@ -81,6 +81,7 @@ void LoopDelay(void)
 void CleanUp(void)
 {
     MacUILib_clearScreen();
+    MacUILib_printf("Game Over!\n");
     MacUILib_uninit();
 
 }

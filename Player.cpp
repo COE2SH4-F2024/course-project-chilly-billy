@@ -145,6 +145,15 @@ void Player::movePlayer()
     {
         playerPos.setObjPos(playerPos.pos->x,1,playerPos.getSymbol());
     }
+
+    for (int i = 1; i < playerPosList->getSize(); i++)
+        {
+            if (playerPos.pos->x == playerPosList->getElement(i).pos->x && playerPos.pos->y == playerPosList->getElement(i).pos->y)
+                 {
+                    mainGameMechsRef->setExitTrue();
+                    mainGameMechsRef->setLoseFlag();
+                }
+        }
     if(!checkFoodConsumption())
     {
         playerPosList->removeTail();

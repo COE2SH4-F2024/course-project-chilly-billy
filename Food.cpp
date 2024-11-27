@@ -26,17 +26,21 @@ Food& Food::operator=(const Food &a)
     }
 }
 
-void Food::generateFood(objPos blockOff)
+void Food::generateFood(objPosArrayList *blockOff)
 {
     srand((time(NULL)));
-    int maxExcluded = 1;
+    int maxExcluded = blockOff->getSize();
 
     int xTaken[maxExcluded];
     int yTaken[maxExcluded];
     char symbolTaken[maxExcluded];
-    symbolTaken[0] = blockOff.getSymbol();
-    xTaken[0] = blockOff.pos->x;
-    yTaken[0] = blockOff.pos->y;
+    for(int i = 0; i < maxExcluded; i++)
+    {
+        symbolTaken[i] = blockOff->getElement(i).getSymbol();
+        xTaken[i] = blockOff->getElement(i).pos->x;
+        yTaken[i] = blockOff->getElement(i).pos->y;
+    }
+
  
 
     int width = mainmech->getBoardSizeX();

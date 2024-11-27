@@ -24,10 +24,10 @@ Player::~Player()
     delete[] playerPosList;
 }
 
-objPosArrayList Player::getPlayerPos() const
+objPosArrayList* Player::getPlayerPos() const
 {
     // return the reference to the playerPos arrray list
-    return *playerPosList;
+    return playerPosList;
 }
 
 void Player::updatePlayerDir()
@@ -119,12 +119,12 @@ void Player::movePlayer()
     objPos oldpos = playerPosList->getHeadElement();
     objPos tailpos = playerPosList->getTailElement();
 
-    mainGameMechsRef->setBoard(tailpos.getObjPos().pos->x,tailpos.getObjPos().pos->y,' ');
+    mainGameMechsRef->setBoard(tailpos.pos->x,tailpos.pos->y,' ');
 
 
-    objPos playerPos = objPos(oldpos.getObjPos().pos->x,oldpos.getObjPos().pos->y,oldpos.getObjPos().getSymbol());
+    objPos playerPos = objPos(oldpos.pos->x,oldpos.pos->y,oldpos.getSymbol());
     
-    playerPos.setObjPos(playerPos.getObjPos().pos->x+dx,playerPos.getObjPos().pos->y+dy,playerPos.getSymbol());
+    playerPos.setObjPos(playerPos.pos->x+dx,playerPos.pos->y+dy,playerPos.getSymbol());
     
     if(playerPos.pos->x == 0)
     {
@@ -144,7 +144,7 @@ void Player::movePlayer()
         playerPos.setObjPos(playerPos.pos->x,1,playerPos.getSymbol());
     }
     playerPosList->removeTail();
-    playerPosList->insertHead(objPos(playerPos.getObjPos().pos->x,playerPos.getObjPos().pos->y,playerPos.getSymbol()));
+    playerPosList->insertHead(playerPos.getObjPos());
     mainGameMechsRef->setBoard(playerPos.pos->x,playerPos.pos->y,playerPos.getSymbol());
 }
 

@@ -11,7 +11,7 @@ class Food
         ~Food();
         Food(const Food &a);
         Food& operator=(const Food &a);
-        void generateFood(objPos blockOff);
+        void generateFood(objPosArrayList *blockOff);
         objPos getFoodPos() const; 
     private:
         objPos foodPos;

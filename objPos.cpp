@@ -18,20 +18,26 @@ objPos::objPos(int xPos, int yPos, char sym)
 
 objPos::~objPos()
 {
-    delete[] pos;
+    delete pos;
 }
 
 objPos::objPos(const objPos &a)
 {
-    
-}
-objPos& objPos::operator=(const objPos &a)
-{
-    // deep copy
     pos = new Pos;
     pos->x = a.pos->x;
     pos->y = a.pos->y;
-    symbol = a.symbol;
+    symbol = a.symbol;   
+}
+objPos& objPos::operator=(const objPos &a)
+{
+    if (this != &a)
+    {
+        pos->x = a.pos->x;
+        pos->y = a.pos->y;
+        symbol = a.symbol;
+    }
+
+    return *this;
 }
 
 // Respect the rule of six / minimum four

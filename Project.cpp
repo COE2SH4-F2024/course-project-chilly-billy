@@ -68,7 +68,7 @@ void DrawScreen(void)
     MacUILib_clearScreen();
     for(int i = 0; i < gamemechs->getBoardSizeY(); i++)
     {
-        printf("%s\n", gamemechs->getBoardLine(i));
+        MacUILib_printf("%s\n", gamemechs->getBoardLine(i));
     }
     MacUILib_printf("Score: %d\n",gamemechs->getScore());
 }

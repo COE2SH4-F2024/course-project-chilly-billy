@@ -23,10 +23,18 @@ objPos::~objPos()
 
 objPos::objPos(const objPos &a)
 {
+    
+}
+objPos& objPos::operator=(const objPos &a)
+{
+    // deep copy
+    delete pos;
     pos = new Pos;
     pos->x = a.pos->x;
     pos->y = a.pos->y;
     symbol = a.symbol;   
+    symbol = a.symbol;
+    return *this;
 }
 objPos& objPos::operator=(const objPos &a)
 {

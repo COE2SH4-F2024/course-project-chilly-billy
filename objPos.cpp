@@ -23,18 +23,10 @@ objPos::~objPos()
 
 objPos::objPos(const objPos &a)
 {
-    
-}
-objPos& objPos::operator=(const objPos &a)
-{
-    // deep copy
-    delete pos;
     pos = new Pos;
     pos->x = a.pos->x;
     pos->y = a.pos->y;
-    symbol = a.symbol;   
-    symbol = a.symbol;
-    return *this;
+    symbol = a.symbol; 
 }
 objPos& objPos::operator=(const objPos &a)
 {
@@ -42,12 +34,11 @@ objPos& objPos::operator=(const objPos &a)
     {
         pos->x = a.pos->x;
         pos->y = a.pos->y;
-        symbol = a.symbol;
+        symbol = a.symbol; 
     }
-
+    
     return *this;
 }
-
 // Respect the rule of six / minimum four
 // [TODO] Implement the missing special member functions to meet the minimum four rule
 

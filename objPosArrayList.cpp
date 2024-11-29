@@ -22,7 +22,7 @@ objPosArrayList::objPosArrayList()
 
 objPosArrayList::~objPosArrayList()
 {
-    delete[] aList; // CHECK FOR LEAKS
+    delete aList; // CHECK FOR LEAKS
 }
 
 // add 2 more for rule of 4

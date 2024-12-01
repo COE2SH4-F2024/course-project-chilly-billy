@@ -52,7 +52,7 @@ GameMechs::GameMechs(int boardX, int boardY)
 // do you need a destructor?
 GameMechs::~GameMechs()
 {
-    for(int i = 0; i < boardSizeX; i++)
+    for(int i = 0; i < boardSizeY; i++)
     {
         delete[] board[i];
     }

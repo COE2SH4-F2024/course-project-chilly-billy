@@ -30,6 +30,26 @@ int objPosArrayList::getSize() const
     return listSize;
 }
 
+// Copy Constructor
+objPosArrayList::objPosArrayList(const objPosArrayList &a)
+{
+    arrayCapacity = a.arrayCapacity; 
+    aList = new objPos[arrayCapacity];
+    listSize = a.listSize;
+}
+
+// Copy assignment operator
+objPosArrayList& objPosArrayList::operator=(const objPosArrayList &a)
+{
+    if (this != &a)
+    {
+        arrayCapacity = a.arrayCapacity; 
+        aList = a.aList;
+        listSize = a.listSize;
+    }
+    return *this;
+}
+
 void objPosArrayList::insertHead(objPos thisPos)
 {
     if(arrayCapacity > listSize)

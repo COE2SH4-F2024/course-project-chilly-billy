@@ -177,6 +177,7 @@ bool Player::checkFoodConsumption()
             if(foodpos.getSymbol() == 'O')
             {
                 mainGameMechsRef->boostScore();
+                playerPosList->removeTail();
             }
             else
             {

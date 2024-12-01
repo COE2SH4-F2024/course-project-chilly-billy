@@ -85,7 +85,7 @@ void LoopDelay(void)
 void CleanUp(void)
 {
     MacUILib_clearScreen();
-    MacUILib_printf("Game Over!\n");
+    MacUILib_printf("Game Over! Your score was %d!\n",gamemechs->getScore());
     MacUILib_uninit();
     delete apple;
     delete gamemechs;

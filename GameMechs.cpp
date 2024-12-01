@@ -60,13 +60,56 @@ GameMechs::~GameMechs()
     board = nullptr;
 }
 
-GameMechs & GameMechs::operator=(const GameMechs &a)
-{
-    // deep copy
-}
 GameMechs::GameMechs(const GameMechs &a)
 {
+    boardSizeX = a.boardSizeX;
+    boardSizeY = a.boardSizeY;
+    score = a.score;
+    board = new char*[boardSizeY];
+    for(int i = 0; i < boardSizeY; i++)
+    {
+        board[i] = new char[boardSizeX+1];
+        for(int j = 0; j < boardSizeX; j++) // leave null char termination string
+        {
+            if(j == 0 || j == boardSizeX-1 || i == 0 || i == boardSizeY-1)
+            {
+                board[i][j] = a.board[i][j];
+            }
+            else
+            {
+                board[i][j] = a.board[i][j];
+            }
+        }
+        board[i][boardSizeX] = a.board[i][boardSizeX];
+    }
+}
 
+GameMechs & GameMechs::operator=(const GameMechs &a)
+{
+    if (this != &a)
+    {
+        boardSizeX = a.boardSizeX;
+        boardSizeY = a.boardSizeY;
+        score = a.score;
+        board = new char*[boardSizeY];
+        for(int i = 0; i < boardSizeY; i++)
+        {
+            board[i] = new char[boardSizeX+1];
+            for(int j = 0; j < boardSizeX; j++) // leave null char termination string
+            {
+                if(j == 0 || j == boardSizeX-1 || i == 0 || i == boardSizeY-1)
+                {
+                    board[i][j] = a.board[i][j];
+                }
+                else
+                {
+                    board[i][j] = a.board[i][j];
+                }
+            }
+            board[i][boardSizeX] = a.board[i][boardSizeX];
+        }
+    }
+    return *this;
 }
 
 void GameMechs::clearBoard()

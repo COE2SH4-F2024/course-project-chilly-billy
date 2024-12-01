@@ -25,6 +25,7 @@ Food& Food::operator=(const Food &a)
         mainmech = a.mainmech;
         foodBucket = a.foodBucket;
     }
+    return *this;
 }
 
 void Food::generateFood(objPosArrayList *blockOff)

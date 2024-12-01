@@ -6,21 +6,37 @@
 objPosArrayList::objPosArrayList()
 {
     arrayCapacity = 200; // default
-
     aList = new objPos[arrayCapacity];
     listSize = 0;
     //aList
-
 }
 
-
-
+// Destructor
 objPosArrayList::~objPosArrayList()
 {
     delete[] aList; // CHECK FOR LEAKS
 }
 
-// add 2 more for rule of 4
+// Copy Constructor
+objPosArrayList::objPosArrayList(const objPosArrayList &a)
+{
+    arrayCapacity = a.arrayCapacity; 
+    aList = new objPos[arrayCapacity];
+    listSize = a.listSize;
+}
+
+// Copy assignment operator
+objPosArrayList& objPosArrayList::operator=(const objPosArrayList &a)
+{
+    if (this != &a)
+    {
+        arrayCapacity = a.arrayCapacity; 
+        aList = a.aList;
+        listSize = a.listSize;
+    }
+    return *this;
+}
+
 
 int objPosArrayList::getSize() const
 {

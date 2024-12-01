@@ -27,8 +27,8 @@ class GameMechs
         GameMechs();
         GameMechs(int boardX, int boardY);
         ~GameMechs(); // is this one needed at all? Why or why not?
-        GameMechs&operator=(const GameMechs &a);
         GameMechs(const GameMechs &a);
+        GameMechs&operator=(const GameMechs &a);
         
 
         // my functions

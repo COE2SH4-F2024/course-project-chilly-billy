@@ -5,75 +5,94 @@
 Food::Food(GameMechs* gamemechs)
 {
     mainmech = gamemechs;
+    foodBucket = new objPosArrayList();
 }
 
 Food::~Food()
 {
-    delete mainmech;
+    delete foodBucket;
 }
 
 Food::Food(const Food &a)
 {
     mainmech = a.mainmech;
-    foodPos = a.foodPos;
+    foodBucket = a.foodBucket;
 }
 Food& Food::operator=(const Food &a)
 {
     if(this != &a)
     {
         mainmech = a.mainmech;
-        foodPos = a.foodPos;
+        foodBucket = a.foodBucket;
     }
 }
 
 void Food::generateFood(objPosArrayList *blockOff)
 {
     srand((time(NULL)));
-    int maxExcluded = blockOff->getSize();
-
-    int xTaken[maxExcluded];
-    int yTaken[maxExcluded];
-    char symbolTaken[maxExcluded];
-    for(int i = 0; i < maxExcluded; i++)
-    {
-        symbolTaken[i] = blockOff->getElement(i).getSymbol();
-        xTaken[i] = blockOff->getElement(i).pos->x;
-        yTaken[i] = blockOff->getElement(i).pos->y;
-    }
-
- 
-
+    int i = 0;
+    int j = 0;
+    int x = 0;
+    int y = 0;
     int width = mainmech->getBoardSizeX();
     int height = mainmech->getBoardSizeY();
+    int maxExcluded = blockOff->getSize();
 
-    int i;
-    //randomly generate coords
-    int randx = (rand() % (width-2)) + 1;
-    int randy = (rand() % (height-2))+ 1;
-    int randchar = randchar = (rand() % 93)+33; // 126-33 is the range, add 33 to it for ascii alphanumeric
-        
-    int available = 0;
-    while(available == 0)
+    for (i = foodBucket->getSize(); i > 0; i--)
     {
-        available = 1;
-        randx = (rand() % (width-2)) + 1; // can never be 0 or width-1
-        randy = (rand() % (height-2))+1; // can never be 0 or height-1
-        randchar = (rand() % 93)+33; // 126-33 is the range, add 33 to it for ascii alphanumeric
-        int xi;
-        for(xi=0;xi<maxExcluded;xi++)
+        objPos clearpos =  foodBucket->getTailElement();
+        if(mainmech->getBoard(clearpos.pos->x,clearpos.pos->y) == 'o' || mainmech->getBoard(clearpos.pos->x,clearpos.pos->y) == 'O')
         {
-            if(xTaken[xi] == randx || yTaken[xi] == randy || symbolTaken[xi] == randchar)
-            {
-                available = 0;
-            }
+            mainmech->setBoard(clearpos.pos->x,clearpos.pos->y,' ');
         }
+        foodBucket->removeTail();
     }
-        //randomly select chars from the goalstring
-    // set objpos to randomly generated x,y,char
-    foodPos.setObjPos(randx,randy,randchar);
+    
+    while (j < 3)
+    {
+        //randomly generate coords
+        int randX = (rand() % (width-2)) + 1;
+        int randY = (rand() % (height-2))+ 1;
+
+        // Checks for snake body overlap
+        for (i = 0; i < maxExcluded; i++)
+        {
+            objPos snakeBody = blockOff->getElement(i);
+            if (snakeBody.pos->x == randX && snakeBody.pos->y == randY)
+            {
+                i = maxExcluded;
+            }         
+        }
+        
+        // Checks for other food overlap
+        for (i = 0; i < j; i++)
+        {
+            objPos foodPos = foodBucket->getElement(i);
+            if (foodPos.pos->x == randX && foodPos.pos->y == randY)
+            {
+                i = j;
+            }         
+        }
+
+        if (j < 2)
+        {
+            foodBucket->insertTail(objPos(randX,randY,'o'));
+        }
+        else
+        {
+            foodBucket->insertTail(objPos(randX,randY,'O'));  
+        }
+        j++;
+    }
+    for(int i = 0; i < foodBucket->getSize(); i++)
+    {
+        objPos curfood = foodBucket->getElement(i);
+        mainmech->setBoard(curfood.pos->x,curfood.pos->y,curfood.getSymbol());
+    }
+    
 }
 
-objPos Food::getFoodPos() const
+objPosArrayList* Food::getFoodPos() const
 { 
-    return foodPos.getObjPos();
+    return foodBucket;
 }

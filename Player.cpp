@@ -21,9 +21,7 @@ Player::Player(GameMechs* thisGMRef, Food* thisGMFood)
 Player::~Player()
 {
     // delete any heap members here
-    delete mainGameMechsRef;
     delete playerPosList;
-    delete foods;
 }
 
 objPosArrayList* Player::getPlayerPos() const
@@ -160,11 +158,7 @@ void Player::movePlayer()
     }
     else
     {
-        mainGameMechsRef->incrementScore();
         foods->generateFood(playerPosList);
-        objPos foodpos = foods->getFoodPos();
-        mainGameMechsRef->setBoard(foodpos.pos->x,foodpos.pos->y,foodpos.getSymbol());
-
     }
     playerPosList->insertHead(playerPos.getObjPos());
     mainGameMechsRef->setBoard(playerPos.pos->x,playerPos.pos->y,playerPos.getSymbol());
@@ -175,10 +169,21 @@ void Player::movePlayer()
 bool Player::checkFoodConsumption()
 {
     objPos playerhead = playerPosList->getHeadElement();
-    objPos foodpos = foods->getFoodPos();
-    if(playerhead.pos->x == foodpos.pos->x && playerhead.pos->y == foodpos.pos->y)
+    for(int i = 0; i < foods->getFoodPos()->getSize(); i++)
     {
-        return true;
+        objPos foodpos = foods->getFoodPos()->getElement(i);
+        if(playerhead.pos->x == foodpos.pos->x && playerhead.pos->y == foodpos.pos->y)
+        {
+            if(foodpos.getSymbol() == 'O')
+            {
+                mainGameMechsRef->boostScore();
+            }
+            else
+            {
+                mainGameMechsRef->incrementScore();
+            }
+            return true;
+        }
     }
     return false;
 }

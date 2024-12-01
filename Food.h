@@ -15,9 +15,9 @@ class Food
         Food(const Food &a);
         Food& operator=(const Food &a);
         void generateFood(objPosArrayList *blockOff);
-        objPos getFoodPos() const; 
+        objPosArrayList* getFoodPos() const; 
     private:
-        objPos foodPos;
+        objPosArrayList* foodBucket;
         GameMechs* mainmech;
 
 };

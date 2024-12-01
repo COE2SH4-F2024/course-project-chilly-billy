@@ -45,7 +45,11 @@ void Initialize(void)
     apple = new Food(gamemechs);
     player1 = new Player(gamemechs,apple);
     apple->generateFood(player1->getPlayerPos());
-    gamemechs->setBoard(apple->getFoodPos().pos->x,apple->getFoodPos().pos->y,apple->getFoodPos().getSymbol());
+    for(int i = 0; i < apple->getFoodPos()->getSize(); i++)
+    {
+        objPos curfood = apple->getFoodPos()->getElement(i);
+        gamemechs->setBoard(curfood.pos->x,curfood.pos->y,curfood.getSymbol());
+    }
 }
 
 void GetInput(void)
@@ -83,5 +87,7 @@ void CleanUp(void)
     MacUILib_clearScreen();
     MacUILib_printf("Game Over!\n");
     MacUILib_uninit();
-
+    delete apple;
+    delete gamemechs;
+    delete player1;
 }

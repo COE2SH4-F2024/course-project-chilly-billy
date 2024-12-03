@@ -56,23 +56,31 @@ void Food::generateFood(objPosArrayList *blockOff)
         int randY = (rand() % (height-2))+ 1;
 
         // Checks for snake body overlap
-        for (i = 0; i < maxExcluded; i++)
+        bool posfilled = false;
+        while(posfilled == false)
         {
-            objPos snakeBody = blockOff->getElement(i);
-            if (snakeBody.pos->x == randX && snakeBody.pos->y == randY)
+            randX = (rand() % (width-2)) + 1;
+            randY = (rand() % (height-2))+ 1;
+            posfilled = true;
+            for (i = 0; i < maxExcluded; i++)
             {
-                i = maxExcluded;
-            }         
-        }
-        
-        // Checks for other food overlap
-        for (i = 0; i < j; i++)
-        {
-            objPos foodPos = foodBucket->getElement(i);
-            if (foodPos.pos->x == randX && foodPos.pos->y == randY)
+                objPos snakeBody = blockOff->getElement(i);
+                if (snakeBody.pos->x == randX && snakeBody.pos->y == randY)
+                {
+                    posfilled = false;
+                    break;
+                }
+            }
+                    // Checks for other food overlap
+            for (i = 0; i < j; i++)
             {
-                i = j;
-            }         
+                objPos foodPos = foodBucket->getElement(i);
+                if (foodPos.pos->x == randX && foodPos.pos->y == randY)
+                {
+                    posfilled = false;
+                    break;
+                }         
+            }
         }
 
         if (j < 2)

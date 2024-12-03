@@ -18,6 +18,7 @@ Food::Food(const Food &a)
     mainmech = a.mainmech;
     foodBucket = a.foodBucket;
 }
+
 Food& Food::operator=(const Food &a)
 {
     if(this != &a)

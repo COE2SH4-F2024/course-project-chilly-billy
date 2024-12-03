@@ -74,6 +74,8 @@ void DrawScreen(void)
     {
         MacUILib_printf("%s\n", gamemechs->getBoardLine(i));
     }
+    MacUILib_printf("Use WASD to move. SPACE to quit.\n");
+    MacUILib_printf("Food types: O - +10 score, o - +1 score and +1 length.\n");
     MacUILib_printf("Score: %d\n",gamemechs->getScore());
 }
 
